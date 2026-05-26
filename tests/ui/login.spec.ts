@@ -1,45 +1,46 @@
-import { test, expect } from '../../fixtures/baseFixture';
-import { testUsers } from '../../utils/testData';
+import { test, expect } from "../../fixtures/baseFixture";
 
-test.describe('Login Functionality', () => {
+import { testUsers } from "../../utils/testData";
 
-    test('Valid Login', async ({ page, loginPage }) => {
+test.describe("Login Functionality", () => {
+  test("Valid Login", async ({ page, loginPage }) => {
+    await loginPage.navigateToLoginPage();
 
-        await loginPage.navigateToLoginPage();
+    await loginPage.login(
+      testUsers.validUser.username,
+      testUsers.validUser.password,
+    );
 
-        await loginPage.login(
-            testUsers.validUser.username,
-            testUsers.validUser.password
-        );
+    // URL validation
+    await expect(page).toHaveURL(/inventory/);
 
-        await expect(page).toHaveURL(/inventory/);
-    });
+    // UI validation
+    expect(await loginPage.isProductTitleVisible()).toBeTruthy();
+  });
 
-    test('Invalid Login', async ({ loginPage, page }) => {
+  test("Invalid Login", async ({ loginPage }) => {
+    await loginPage.navigateToLoginPage();
 
-        await loginPage.navigateToLoginPage();
+    await loginPage.login(
+      testUsers.invalidUser.username,
+      testUsers.invalidUser.password,
+    );
 
-        await loginPage.login(
-            testUsers.invalidUser.username,
-            testUsers.invalidUser.password
-        );
+    const errorText = await loginPage.getErrorText();
 
-        await expect(
-            page.locator('[data-test="error"]')
-        ).toBeVisible();
-    });
+    expect(errorText).toContain("Username and password");
+  });
 
-    test('Locked User Login', async ({ loginPage, page }) => {
+  test("Locked User Login", async ({ loginPage }) => {
+    await loginPage.navigateToLoginPage();
 
-        await loginPage.navigateToLoginPage();
+    await loginPage.login(
+      testUsers.lockedUser.username,
+      testUsers.lockedUser.password,
+    );
 
-        await loginPage.login(
-            testUsers.lockedUser.username,
-            testUsers.lockedUser.password
-        );
+    const errorText = await loginPage.getErrorText();
 
-        await expect(
-            page.locator('[data-test="error"]'
-        )).toContainText('locked out');
-    });
+    expect(errorText).toContain("locked out");
+  });
 });

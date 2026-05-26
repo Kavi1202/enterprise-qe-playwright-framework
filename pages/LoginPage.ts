@@ -7,14 +7,28 @@ export class LoginPage {
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
     readonly errorMessage: Locator;
+    readonly productTitle: Locator;
 
     constructor(page: Page) {
         this.page = page;
 
-        this.usernameInput = page.locator('#user-name');
-        this.passwordInput = page.locator('#password');
-        this.loginButton = page.locator('#login-button');
-        this.errorMessage = page.locator('[data-test="error"]');
+        // Better locator strategy
+        this.usernameInput =
+            page.getByPlaceholder('Username');
+
+        this.passwordInput =
+            page.getByPlaceholder('Password');
+
+        this.loginButton =
+            page.getByRole('button', {
+                name: 'Login'
+            });
+
+        this.errorMessage =
+            page.locator('[data-test="error"]');
+
+        this.productTitle =
+            page.locator('[data-test="title"]');
     }
 
     async navigateToLoginPage() {
@@ -33,13 +47,20 @@ export class LoginPage {
         await this.loginButton.click();
     }
 
-    async login(username: string, password: string) {
+    async login(
+        username: string,
+        password: string
+    ) {
         await this.enterUsername(username);
         await this.enterPassword(password);
         await this.clickLogin();
     }
 
-    async getErrorMessage() {
+    async getErrorText() {
         return await this.errorMessage.textContent();
+    }
+
+    async isProductTitleVisible() {
+        return await this.productTitle.isVisible();
     }
 }
