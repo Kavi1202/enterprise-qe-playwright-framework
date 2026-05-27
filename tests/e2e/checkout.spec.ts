@@ -8,42 +8,72 @@ import {
 } from '../../utils/testData';
 
 test.describe(
-    'Checkout Flow',
-    () => {
+'Complete Checkout Flow',
+() => {
 
-    test(
-    'User should add item to cart',
-    async ({
-        page,
-        loginPage,
-        inventoryPage
-    }) => {
+test(
+'User should complete purchase successfully',
+async ({
+    page,
+    loginPage,
+    inventoryPage,
+    cartPage,
+    checkoutPage
+}) => {
 
-        await loginPage
-            .navigateToLoginPage();
+    await loginPage
+        .navigateToLoginPage();
 
-        await loginPage.login(
-            testUsers.validUser.username,
-            testUsers.validUser.password
+    await loginPage.login(
+        testUsers.validUser.username,
+        testUsers.validUser.password
+    );
+
+    await expect(page)
+        .toHaveURL(/inventory/);
+
+    await inventoryPage
+        .addProductToCart();
+
+    expect(
+        await inventoryPage
+            .getCartCount()
+    ).toBe('1');
+
+    await inventoryPage
+        .navigateToCart();
+
+    expect(
+        await cartPage
+            .isCartPageVisible()
+    ).toBeTruthy();
+
+    expect(
+        await cartPage
+            .getProductName()
+    ).toContain('Sauce Labs');
+
+    await cartPage
+        .clickCheckout();
+
+    await checkoutPage
+        .enterCheckoutDetails(
+            'Kaviraj',
+            'P',
+            '560067'
         );
 
-        await expect(page)
-            .toHaveURL(/inventory/);
+    await checkoutPage
+        .continueCheckout();
 
-        expect(
-            await inventoryPage
-                .isInventoryPageVisible()
-        ).toBeTruthy();
+    await checkoutPage
+        .finishCheckout();
 
-        await inventoryPage
-            .addProductToCart();
+    const successMessage =
+        await checkoutPage
+            .getSuccessMessage();
 
-        expect(
-            await inventoryPage
-                .getCartCount()
-        ).toBe('1');
-
-        await inventoryPage
-            .navigateToCart();
-    });
+    expect(successMessage)
+        .toContain('Thank you');
+});
 });

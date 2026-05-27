@@ -1,26 +1,49 @@
-import { test as base } from "@playwright/test";
+import { test as base }
+from '@playwright/test';
 
-import { LoginPage } from "../pages/LoginPage";
+import { LoginPage }
+from '../pages/LoginPage';
 
-import { InventoryPage } from "../pages/InventoryPage";
+import { InventoryPage }
+from '../pages/InventoryPage';
+
+import { CartPage }
+from '../pages/CartPage';
+
+import { CheckoutPage }
+from '../pages/CheckoutPage';
 
 type PageFixtures = {
-  loginPage: LoginPage;
-  inventoryPage: InventoryPage;
+    loginPage: LoginPage;
+    inventoryPage: InventoryPage;
+    cartPage: CartPage;
+    checkoutPage: CheckoutPage;
 };
 
-export const test = base.extend<PageFixtures>({
-  loginPage: async ({ page }, use) => {
-    const loginPage = new LoginPage(page);
+export const test =
+base.extend<PageFixtures>({
 
-    await use(loginPage);
-  },
+    loginPage:
+    async ({ page }, use) => {
+        await use(new LoginPage(page));
+    },
 
-  inventoryPage: async ({ page }, use) => {
-    const inventoryPage = new InventoryPage(page);
+    inventoryPage:
+    async ({ page }, use) => {
+        await use(new InventoryPage(page));
+    },
 
-    await use(inventoryPage);
-  },
+    cartPage:
+    async ({ page }, use) => {
+        await use(new CartPage(page));
+    },
+
+    checkoutPage:
+    async ({ page }, use) => {
+        await use(new CheckoutPage(page));
+    },
 });
 
-export { expect } from "@playwright/test";
+export {
+    expect
+} from '@playwright/test';
