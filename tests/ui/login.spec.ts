@@ -1,9 +1,9 @@
 import { test, expect } from "../../fixtures/baseFixture";
-
 import { testUsers } from "../../utils/testData";
+import { LoginAssertions } from "../../assertions/loginAssertions";
 
 test.describe("Login Functionality", () => {
-  test("Valid Login", async ({ page, loginPage }) => {
+  test("@smoke @regression Valid Login", async ({ page, loginPage }) => {
     await loginPage.navigateToLoginPage();
 
     await loginPage.login(
@@ -15,10 +15,10 @@ test.describe("Login Functionality", () => {
     await expect(page).toHaveURL(/inventory/);
 
     // UI validation
-    expect(await loginPage.isProductTitleVisible()).toBeTruthy();
+    await LoginAssertions.verifyLoginSuccess(loginPage);
   });
 
-  test("Invalid Login", async ({ loginPage }) => {
+  test("@regression Invalid Login", async ({ loginPage }) => {
     await loginPage.navigateToLoginPage();
 
     await loginPage.login(
@@ -28,10 +28,13 @@ test.describe("Login Functionality", () => {
 
     const errorText = await loginPage.getErrorText();
 
-    expect(errorText).toContain("Username and password");
+    await LoginAssertions.verifyErrorMessage(
+      loginPage,
+      "Username and password",
+    );
   });
 
-  test("Locked User Login", async ({ loginPage }) => {
+  test("@regression Locked User Login", async ({ loginPage }) => {
     await loginPage.navigateToLoginPage();
 
     await loginPage.login(
@@ -41,6 +44,6 @@ test.describe("Login Functionality", () => {
 
     const errorText = await loginPage.getErrorText();
 
-    expect(errorText).toContain("locked out");
+    await LoginAssertions.verifyErrorMessage(loginPage, "locked out");
   });
 });
