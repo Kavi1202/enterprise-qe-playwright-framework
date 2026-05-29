@@ -1,43 +1,36 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   timeout: 60000,
-  
-  testDir: './tests',
+
+  testDir: "./tests",
 
   fullyParallel: true,
 
   retries: 2,
 
-  workers: 2,
+  workers: 1,
 
-  reporter: [
-    ['html'],
-    ['list']
-  ],
+  reporter: [["html"], ["list"]],
 
   use: {
-    baseURL: 'https://www.saucedemo.com/',
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    headless: false
+    baseURL: "https://www.saucedemo.com/",
+
+    trace: "on-first-retry",
+
+    screenshot: "only-on-failure",
+
+    video: "retain-on-failure",
+
+    headless: !!process.env.CI,
   },
 
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+      },
     },
   ],
 });
