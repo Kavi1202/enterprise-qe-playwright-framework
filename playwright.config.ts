@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import { ENV } from './config/env';
 
 export default defineConfig({
   timeout: 60000,
@@ -14,7 +15,7 @@ export default defineConfig({
   reporter: [["html"], ["list"]],
 
   use: {
-    baseURL: "https://www.saucedemo.com/",
+    baseURL: ENV.baseUrl,
 
     trace: "on-first-retry",
 

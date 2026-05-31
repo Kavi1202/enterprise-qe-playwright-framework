@@ -3,17 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {"smoke": "npx playwright test --grep @smoke",
-              "regression": "npx playwright test --grep @regression",
-              "headed": "npx playwright test --headed",
-              "report": "npx playwright show-report",
-              "api": "npx playwright test tests/api"},
+  "scripts": {
+    "smoke": "npx playwright test --grep @smoke",
+    "regression": "npx playwright test --grep @regression",
+    "headed": "npx playwright test --headed",
+    "report": "npx playwright show-report",
+    "api": "npx playwright test tests/api",
+    "test:qa": "cross-env TEST_ENV=qa npx playwright test",
+    "test:stage": "cross-env TEST_ENV=stage npx playwright test",
+    "test:prod": "cross-env TEST_ENV=prod npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.9.1"
+    "@types/node": "^25.9.1",
+    "cross-env": "^10.1.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }
