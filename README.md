@@ -167,6 +167,17 @@ Integrated with **GitHub Actions** for automated smoke execution on every push a
 - Smoke test execution
 - Report artifact upload
 - Automated validation for pull requests
+
+## 🤖 GenAI for Testing
+
+Implemented GenAI-assisted utilities for:
+
+- Test Case Generation
+- Exploratory Test Design
+- Risk Identification
+- Edge Case Discovery
+
+These utilities help accelerate test planning and improve test coverage during requirement analysis.
 ## 🚀 Future Enhancement
 
 - Dockerized Playwright execution
