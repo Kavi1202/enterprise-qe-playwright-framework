@@ -14,7 +14,9 @@
     "test:prod": "cross-env TEST_ENV=prod npx playwright test",
     "allure:generate": "allure generate ./allure-results --clean",
     "allure:open": "allure open ./allure-report",
-    "allure": "allure generate ./allure-results --clean && allure open ./allure-report"
+    "allure": "allure generate ./allure-results --clean && allure open ./allure-report",
+    "db:init": "tsx database/setupDatabase.ts",
+    "db": "npx playwright test tests/db"
   },
   "keywords": [],
   "author": "",
@@ -23,11 +25,14 @@
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.1",
+    "@types/sqlite3": "^3.1.11",
     "allure-commandline": "^2.42.0",
     "allure-playwright": "^3.9.0",
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "tsx": "^4.22.3"
   },
   "dependencies": {
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "sqlite3": "^6.0.1"
   }
 }
