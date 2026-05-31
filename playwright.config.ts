@@ -1,5 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
-import { ENV } from './config/env';
+import { ENV } from "./config/env";
 
 export default defineConfig({
   timeout: 60000,
@@ -12,7 +12,7 @@ export default defineConfig({
 
   workers: 1,
 
-  reporter: [["html"], ["list"]],
+  reporter: [["list"], ["html"], ["allure-playwright"]],
 
   use: {
     baseURL: ENV.baseUrl,

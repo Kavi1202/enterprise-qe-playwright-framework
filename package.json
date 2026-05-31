@@ -11,7 +11,10 @@
     "api": "npx playwright test tests/api",
     "test:qa": "cross-env TEST_ENV=qa npx playwright test",
     "test:stage": "cross-env TEST_ENV=stage npx playwright test",
-    "test:prod": "cross-env TEST_ENV=prod npx playwright test"
+    "test:prod": "cross-env TEST_ENV=prod npx playwright test",
+    "allure:generate": "allure generate ./allure-results --clean",
+    "allure:open": "allure open ./allure-report",
+    "allure": "allure generate ./allure-results --clean && allure open ./allure-report"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +23,8 @@
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.1",
+    "allure-commandline": "^2.42.0",
+    "allure-playwright": "^3.9.0",
     "cross-env": "^10.1.0"
   },
   "dependencies": {

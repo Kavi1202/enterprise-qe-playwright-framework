@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2073","@smoke @regression Valid Login","chromium","2026-05-31","passed","2026-05-31","Login Functionality","ui\login.spec.ts","",""
+"","1700","@regression Locked User Login","chromium","2026-05-31","passed","2026-05-31","Login Functionality","ui\login.spec.ts","",""
+"","2653","@smoke @regression User should complete purchase successfully","chromium","2026-05-31","passed","2026-05-31","Complete Checkout Flow","e2e\checkout.spec.ts","",""
+"","2212","@regression UI and API inventory validation","chromium","2026-05-31","passed","2026-05-31","","e2e\inventory-validation.spec.ts","",""
+"","2032","@regression Invalid Login","chromium","2026-05-31","passed","2026-05-31","Login Functionality","ui\login.spec.ts","",""
+"","421","@smoke @api Should fetch inventory successfully","chromium","2026-05-31","passed","2026-05-31","Inventory API Validation","api\inventory.api.spec.ts","",""

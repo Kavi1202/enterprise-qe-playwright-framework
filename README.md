@@ -142,11 +142,21 @@ Playwright automatically generates execution reports for easier debugging and an
 
 #### GitHub Actions CI Pipeline
 
-![App Screenshot](https://dummyimage.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](screenshots/github-actions.png)
 
 #### Playwright HTML Report
 
-![App Screenshot](https://dummyimage.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](screenshots/html-report.png)
+
+## 📊 Allure Reports
+
+### Dashboard
+
+![Dashboard](screenshots/allure-dashboard.png)
+
+### Timeline
+
+![Timeline](screenshots/allure-timeline.png)
 ## ⚙️ CI/CD Integration
 
 Integrated with **GitHub Actions** for automated smoke execution on every push and pull request.

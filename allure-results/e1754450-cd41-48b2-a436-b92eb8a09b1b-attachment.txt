@@ -1,0 +1,2 @@
+ENV Username: standard_user
+ENV Password: secret_sauce
